@@ -1,0 +1,35 @@
+program Prime; // Проверка чисел на простоту
+uses crt;
+var number: integer := 0;
+begin
+  crt.SetWindowTitle('Простые числа');
+  while true do
+    begin
+      repeat
+        TextColor(LightGreen);
+        Print('Введите число, большее 1:');
+        TextColor(Yellow);
+        number := ReadInteger;
+        if (number = 0) then exit;
+      until (number > 1);
+      //
+      var flag := true;
+      Println;
+      for var i := 2 to Floor(5) do
+        begin
+          if (number mod i = 0) then
+            begin
+              TextColor(LightRed);
+              Println('Число составное');
+              flag := false;
+              break;
+            end;
+        end;//for
+       if (flag) then
+         begin
+           TextColor(LightGreen);
+           Println('Число простое')
+         end;
+         Println;
+    end;
+end.
