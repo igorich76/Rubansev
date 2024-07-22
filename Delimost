@@ -31,3 +31,24 @@ begin
       end;
     end;
 end.
+/////////////////////// оптимизировал под современный вид /////////////
+## //Делимость
+var (number, sNumber) := (0, '');
+while true do
+    begin
+      repeat
+        Print(#65535,'Введите число:');
+        number := ReadInteger;
+        if (number = 0) then exit;
+      until (number >= 1);
+            
+    for var i := 2 to 31 do
+      begin
+        if (number mod i = 0) then sNumber := #65532'Число делится на '
+           else sNumber := #65534'Число не делится на ';
+           
+        if (i < 10) then sNumber += ' ';
+        
+        Println(sNumber + i.ToString)
+      end;
+ end;
