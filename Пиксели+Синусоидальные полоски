@@ -1,0 +1,36 @@
+uses GraphWPF;
+const
+  WIDTH = 640;
+  HEIGHT = 500;
+//
+procedure Prepare();
+begin
+  Window.Title := 'Класс Windows WPF';
+  //Window.Width := 640;
+  //Window.Height := 500;
+  Window.SetSize(WIDTH, HEIGHT);
+  Window.CenterOnScreen;
+  Window.IsFixedSize := true;
+  Window.Clear(Colors.LightGreen);
+end;
+//
+procedure Draw();
+begin
+  var wl := 10.0;
+  SetPixels(0, 0, WIDTH + 9, HEIGHT + 9, (x, y)->
+      RGB(byte(255 * (1 + Sin(y / wl)) / 2), 0,
+      byte(255 * (1 + Sin(y / wl)) / 2)));
+end;
+//
+begin
+  Prepare;
+  // рисование пикселей
+  {for var x := 8 to HEIGHT do 
+    for var y := 8 to WIDTH do
+      begin
+        var clr := RandomColor;
+        SetPixel(x,y,clr);
+      end;}
+Draw;
+Milliseconds.Println;
+end.
