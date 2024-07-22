@@ -32,5 +32,7 @@ begin
         SetPixel(x,y,clr);
       end;}
 Draw;
-Milliseconds.Println;
+//Milliseconds.Println;
+var m := MillisecondsDelta;
+Window.Title += m;
 end.
