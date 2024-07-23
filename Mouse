@@ -1,0 +1,43 @@
+program Mouse;
+uses GraphWPF;
+const
+  width = 720;
+  height = 720;
+  cx = width/2;
+  cy = height/2;
+  pen_width = 2.5;
+var
+  tx,ty: real;
+procedure Prepare();
+begin
+  Window.Title := 'Мышка WPF';
+  Window.SetSize(WIDTH, HEIGHT);
+  Window.CenterOnScreen;
+  Window.IsFixedSize := true;
+  FillRectangle(0,0,WIDTH+10, HEIGHT+10, Colors.SeaShell);
+  //Window.Clear(Colors.LightGreen);
+end;
+procedure MouseDown(mx,my: real; mousebutton: integer);
+begin
+  var dx := mx - tx;
+  var dy := my - ty;
+  var a := System.Math.Atan2(dy, dx);
+  var dist := Sqrt(dx**2 + dy**2);
+  var x := tx + dist*Cos(a);
+  var y := ty+dist*Sin(a);
+  // запоминаем новые координаты:
+  tx := x;
+  ty := y;
+  // вперёд!
+  LineTo(x,y);
+end;
+
+begin
+  Prepare;
+  Pen.Width := 2;
+  Pen.Color := Colors.Green;
+  MoveTo(cx,cy);
+  tx := cx;
+  ty := cy;
+  OnMouseDown := MouseDown;
+end.
