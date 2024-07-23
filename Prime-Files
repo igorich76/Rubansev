@@ -1,0 +1,59 @@
+//программа для поиска простых чисел
+//в заданном диапазоне
+uses crt;
+var
+  start: integer;
+  finish: integer;
+  number: integer;
+  f: TextFile;
+
+begin
+  while true do
+    begin
+      TextColor(LightGreen);
+      Print('Введите начало диапазона:');
+      TextColor(Yellow);
+      start := ReadInteger;
+      //если задан нуль, то работу программы завершаем
+      if (start = 0) then exit;
+      if (start < 2) then start := 2;
+      
+      repeat
+        TextColor(LightGreen);
+        Print('Введите конец диапазона:');
+        TextColor(Yellow);
+        finish := ReadInteger;
+      until (finish >= start);
+      
+      Assign(f, 'primes.txt');
+      Append(f);
+      Rewrite(f);
+      Println;
+      var flg := true;
+      for var j := start to finish do
+        begin
+          number := j;
+          flg := true;
+          //проверка деления введенного числа
+      //на 2..корень из  числа
+      for var i := 2 to Floor(Sqrt(number)) do
+        begin
+          if (number mod i = 0) then
+            begin
+              TextColor(LightRed);
+              flg := false;
+              break;
+            end;
+        end;//for
+        if (flg) then
+          begin
+            TextColor(LightGreen);
+            Println(number.ToString + ' Число простое');
+            Println(f, number.ToString);
+          end;
+        end;
+      Println;
+      Println(f, '');
+      Close(f);
+    end;
+end.
